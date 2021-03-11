@@ -49,6 +49,13 @@ class Hello(Resource):
         return "Hello World !"
 
 class Register(Resource):
+
+    def token(self):
+
+        key = "token"
+
+        return key
+
     def post(self):
         data = request.get_json()
 
@@ -72,7 +79,8 @@ class Register(Resource):
 
         retJson = {
             "status": 200,
-            "msg": "Registration successful"
+            "msg": "Registration successful",
+            "token": self.token
         }
         return jsonify(retJson)
 
@@ -170,7 +178,12 @@ class Messages(Resource):
 
         if messages:
 
-            return messages
+            retJson = {
+                "status": 200,
+                "messages": messages
+            }
+
+            return jsonify(retJson)
         
         else:
 
@@ -178,10 +191,10 @@ class Messages(Resource):
                 "status": 404,
                 "msg": "Messages not found"
             }
-        return jsonify(retJson) 
+            return jsonify(retJson) 
 
 api.add_resource(Hello, "/hello")
-api.add_resource(Messages, "/hello/<string:username>")
+api.add_resource(Messages, "/user/<string:username>")
 api.add_resource(Register, "/register")
 api.add_resource(Retrieve, "/retrieve")
 api.add_resource(Save, "/save")
