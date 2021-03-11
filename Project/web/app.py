@@ -102,14 +102,14 @@ class Retrieve(Resource):
             }
             return jsonify(retJson)
 
-            messages = getUserMessages(username)
+        messages = getUserMessages(username)
 
-            retJson = {
-                "status": 200,
-                "obj": messages
-            }
+        retJson = {
+            "status": 200,
+            "obj": messages
+        }
 
-            return jsonify(retJson)
+        return jsonify(retJson)
 
 class Save(Resource):
 
@@ -168,6 +168,6 @@ api.add_resource(Register, "/register")
 api.add_resource(Retrieve, "/retrieve")
 api.add_resource(Save, "/save")
 
-if __name__ == "main":
+if __name__ == "__main__":
 
     app.run(host="0.0.0.0", debug=True)
