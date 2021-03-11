@@ -162,8 +162,26 @@ class Save(Resource):
 
         return jsonify(retJson)
 
+class Messages(Resource):
+
+    def get(self, username):
+
+        messages = getUserMessages(username)
+
+        if messages:
+
+            return messages
+        
+        else:
+
+            retJson = {
+                "status": 404,
+                "msg": "Messages not found"
+            }
+        return jsonify(retJson) 
 
 api.add_resource(Hello, "/hello")
+api.add_resource(Messages, "/hello/<string:username>")
 api.add_resource(Register, "/register")
 api.add_resource(Retrieve, "/retrieve")
 api.add_resource(Save, "/save")
